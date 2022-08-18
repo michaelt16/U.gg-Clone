@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+    padding: 0;
+    
+    
+  }
+.container{
+
+    display: grid;
+    grid-template-columns: 0.92fr 5fr;
+    grid-template-rows: 1fr 10fr;
+    background-color: #0a0b1b;
+    height: 100vh;
+    color: white;
+
+}
+
+.header{
+    grid-column: 1/-1;
+    background-color: #0b0b23;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    border-bottom: 0.5px solid #2b2c44;
+}
+
+.logo{
+    padding-top: 15px;
+    padding-left: 50px;
+    padding-bottom: 15px;
+    padding-right: 95px;
+    border-right: 0.5px solid #2b2c44;
+    
+}
+.sidebar{
+    grid-column: 1/2;
+    grid-row:2/2;
+    background-color: #17172e;
+    display: grid;
+    grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr 4fr;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.middle-area{
+    padding:40vh;
+}
+.tierlist,.champion,.items{
+    padding-top:30px;
+    padding-left:40px;
+    font-size: 20px;
+    color:#8c8faa;
+}
+
+
+
+
+.search {
+    border: 1px solid grey;
+    border-radius: 40px;
+    height: 60px;
+    width: 100%;
+    padding: 2px 23px 2px 30px;
+    outline: 0;
+    background-color: #f5f5f5;
+  }
