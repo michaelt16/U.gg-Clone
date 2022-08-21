@@ -159,7 +159,11 @@ function App() {
       
        <div className= "container">
           <h5>League of Legends Player Searcher</h5>
-          <input type = "text" onChange={e => setSearchText(e.target.value)}onKeyPress={handleKeypress}></input>
+          <form>
+          <input type = "text" onChange={e => setSearchText(e.target.value)}>
+            </input><input onKeyPress={handleKeypress}></input>
+          </form>
+         
           <button onClick={e => searchForPlayer(e)} >Search For Player</button>
         </div>
 
