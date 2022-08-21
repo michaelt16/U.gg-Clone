@@ -10,7 +10,7 @@ function App() {
   const [searchText, setSearchText] = useState ("");
   const [playerData, setPlayerData] = useState ({});
   const [playerRank, setPlayerRank] = useState ("");
-  const API_KEY=  "RGAPI-1eeda3c6-da03-48ce-a357-889abc6bd632";
+  const API_KEY=  "RGAPI-e42d85ec-d3bc-487f-9573-ee6f5f5ae9d5";
   console.log(searchText)
 
   //function to search player
@@ -159,10 +159,10 @@ function App() {
       
        <div className= "container">
           <h5>League of Legends Player Searcher</h5>
-          <form>
-          <input type = "text" onChange={e => setSearchText(e.target.value)}>
-            </input><input onKeyPress={handleKeypress}></input>
-          </form>
+          
+          <input type = "text" onChange={e => setSearchText(e.target.value)} onKeyPress={handleKeypress}>
+            </input>
+          
          
           <button onClick={e => searchForPlayer(e)} >Search For Player</button>
         </div>
