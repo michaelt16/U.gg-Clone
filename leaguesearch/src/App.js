@@ -3,14 +3,18 @@ import './App.css';
 import React, { useState } from "react";
 import axios from 'axios';
 import IMAGES from './images.js';
+import matchQueryService from './services/match.js';
+
+
 
 
 
 function App() {
   const [searchText, setSearchText] = useState ("");
   const [playerData, setPlayerData] = useState ({});
-  const [playerRank, setPlayerRank] = useState ("");
-  const API_KEY=  "RGAPI-e42d85ec-d3bc-487f-9573-ee6f5f5ae9d5";
+  const [playerTier, setPlayerTier] = useState ("");
+
+  const API_KEY=  "RGAPI-c6ef3ac7-151b-4dca-a485-eb46a631d7ff";
   console.log(searchText)
 
   //function to search player
@@ -27,28 +31,7 @@ function App() {
     }).catch((error)=> console.log(error))
    }
 
-   //function to print the stuff from data given
-  //  function printFromData(){
-  //   console.log("Agfasdfasdf" , playerData)
-  //    return JSON.stringify(playerData) != '{}' ? 
-
-     
-  //        <>
-        
-  //       <p>{playerData.name}</p>
-  //       <p>{playerData.summonerLevel}</p>
-  //       <img width = "100" height="100" src ={"http://ddragon.leagueoflegends.com/cdn/12.15.1/img/profileicon/"+ playerData.profileIconId +".png"}></img>
-  //       <img width = "100" height="100" src = {'"'+ printIconByRank (playerData.id)+ '"'} alt = "icon"></img>
-  //       {/* <img width = "100" height="100" src = "images/Emblem_Challenger.png" alt = "icon"></img> */}
-  //       {/* <p>{playerRank}</p> */}
-  //       </>
-       
-  //       :
-
-  //       <><p>No player Data</p></> 
-        
-         
-  //  }
+ 
 
    // this function is another api call which takes in the encripted riot id then from it, 
    //will have the string of the rank and print icon associated with it
@@ -89,56 +72,86 @@ function App() {
           let respData = response.data[setIndex]
           
            console.log("tier is " +respData.tier + " "+ respData.rank)
-           setPlayerRank( respData.tier + " " + respData.rank)
-           console.log(rankIcons (respData.tier))
-           return rankIcons (respData.tier)
+           setPlayerTier( respData.tier )
            
+          //  console.log(rankIcons (respData.tier))
+          //  return rankIcons (respData.tier)
+           return;
           // return response.data.tier + response.data.rank
         } else{
           console.log("unranked")
-          setPlayerRank("UNRANKED")
+          setPlayerTier("UNRANKED")
         }
 
 
     })
    }
+  //  function findMatchId(puuid){
+  //   matchQueryService.get(puuid)
+  //  }
   
-
-   //helper function for sorting the different rank icons
-   function rankIcons (rankString){
-    console.log (rankString)
-    let image =""
-
-    switch (rankString){
-      case 'IRON':
-        return "./images/Emblem_Iron.png"
-      case 'BRONZE':
-        return "./images/Emblem_Bronze.png"
-      case 'SILVER':
-        return "./images/Emblem_Silver.png"
-      case 'GOLD':
-        return "./images/Emblem_Gold.png"
-      case 'PLATINUM':
-        return "./images/Emblem_Platinum.png"
-       
-      case 'DIAMOND':
-        image =  IMAGES.diamond
-        break;
-      
-      case 'MASTER':
-        return "./images/Emblem_Master.png"
-      case 'GRANDMASTER':
-        return "./images/Emblem_Grandmaster.png"  
-      case 'CHALLENGER':
-        image = IMAGES.challenger
-        break;
-
-    }
-
-    return image
+  function findMatchId (puuid){
+    let url = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"
+    let APICallString = url +puuid +"/ids?api_key=" + API_KEY
     
 
-   }
+    axios.get(APICallString).then (function(response) {
+      
+      console.log(response)
+      for (let i = 0; i < 3; i++){
+        console.log(response.data[i])
+        loadMatches(response.data[i])
+      }
+    })
+  }
+
+  function loadMatches (matchId){
+    let url = "https://americas.api.riotgames.com/lol/match/v5/matches/"
+    let APICallString = url +matchId +"?api_key=" + API_KEY
+
+    axios.get(APICallString).then (function(response) {
+      console.log(response)
+
+      
+    })
+
+  }
+
+   //helper function for sorting the different rank icons
+  //  function rankIcons (rankString){
+  //   console.log (rankString)
+  //   let image =""
+
+  //   switch (rankString){
+  //     case 'IRON':
+  //       return "./images/Emblem_Iron.png"
+  //     case 'BRONZE':
+  //       return "./images/Emblem_Bronze.png"
+  //     case 'SILVER':
+  //       return "./images/Emblem_Silver.png"
+  //     case 'GOLD':
+  //       return "./images/Emblem_Gold.png"
+  //     case 'PLATINUM':
+  //       return "./images/Emblem_Platinum.png"
+       
+  //     case 'DIAMOND':
+  //       image =  IMAGES.diamond
+  //       break;
+      
+  //     case 'MASTER':
+  //       return "./images/Emblem_Master.png"
+  //     case 'GRANDMASTER':
+  //       return "./images/Emblem_Grandmaster.png"  
+  //     case 'CHALLENGER':
+  //       image = IMAGES.challenger
+  //       break;
+
+  //   }
+
+  //   return image
+    
+
+  //  }
 
 
 
@@ -174,12 +187,14 @@ function App() {
 
 <p>{playerData.name}</p>
 <p>{playerData.summonerLevel}</p>
+<p>{findMatchId(playerData.puuid)}</p>
 
+{ printIconByRank (playerData.id)}
 
 <img width = "100" height="100" src ={"http://ddragon.leagueoflegends.com/cdn/12.15.1/img/profileicon/"+ playerData.profileIconId +".png"}></img>
-<img width = "100" height="100" src = { printIconByRank (playerData.id)} alt = "icon"></img>
-{/* <img width = "100" height="100" src = {IMAGES.challenger} alt = "icon"></img> */}
-<p>{playerRank}</p>
+
+<img width = "100" height="100" src = {IMAGES[playerTier.toLowerCase()]} alt = "icon"></img>
+<p>{playerTier}</p>
 </>
 
 :
