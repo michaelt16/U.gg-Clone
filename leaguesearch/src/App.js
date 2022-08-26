@@ -174,21 +174,17 @@ function App() {
      
 <div className ="container">
 
-    {/* <div className="header"> */}
-       {/* <div className="logo">  */}
-        {/* <img src="ugglogo.PNG" alt="ugg"> */}
-        
-       {/* </div> */}
+    
       
         <TopbarDefault/>
        
        
-{/* tetst */}
-    {/* </div> */}
 
-    {/* <div className="sidebar"> */}
+    
+
+    
        <Sidebar/>
-    {/* </div> */}
+    
 
     <MiddleDefault/>
    
