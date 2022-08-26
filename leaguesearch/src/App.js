@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import axios from 'axios';
 import IMAGES from './images.js';
 import matchQueryService from './services/match.js';
+import Sidebar from './components/Sidebar';
+import TopbarDefault from './components/TopBarDefault';
+import MiddleDefault from './components/MiddleDefault';
 
 
 
@@ -168,40 +171,71 @@ function App() {
   //  console.log("player rank is" ,playerRank)
 
   return (
-    <div className="App">
+     
+<div className ="container">
+
+    {/* <div className="header"> */}
+       {/* <div className="logo">  */}
+        {/* <img src="ugglogo.PNG" alt="ugg"> */}
+        
+       {/* </div> */}
       
-       <div className= "container">
-          <h5>League of Legends Player Searcher</h5>
+        <TopbarDefault/>
+       
+       
+{/* tetst */}
+    {/* </div> */}
+
+    {/* <div className="sidebar"> */}
+       <Sidebar/>
+    {/* </div> */}
+
+    <MiddleDefault/>
+   
+   
           
-          <input type = "text" onChange={e => setSearchText(e.target.value)} onKeyPress={handleKeypress}>
-            </input>
+
+
+</div>
+
+/*     
+//     <div className="App">
+//       <div class = "sidebar"><Sidebar/></div>
+
+      
+      
+//        <div className= "container">
+//           <h5>League of Legends Player Searcher</h5>
+          
+//           <input type = "text" onChange={e => setSearchText(e.target.value)} onKeyPress={handleKeypress}>
+//             </input>
           
          
-          <button onClick={e => searchForPlayer(e)} >Search For Player</button>
-        </div>
+//           <button onClick={e => searchForPlayer(e)} >Search For Player</button>
+//         </div>
 
-    {JSON.stringify(playerData) != '{}' ? 
+//     {JSON.stringify(playerData) != '{}' ?  */
 
      
-<>
+// <>
 
-<p>{playerData.name}</p>
-<p>{playerData.summonerLevel}</p>
-<p>{findMatchId(playerData.puuid)}</p>
+// <p>{playerData.name}</p>
+// <p>{playerData.summonerLevel}</p>
+// <p>{findMatchId(playerData.puuid)}</p>
 
-{ printIconByRank (playerData.id)}
+// { printIconByRank (playerData.id)}
 
-<img width = "100" height="100" src ={"http://ddragon.leagueoflegends.com/cdn/12.15.1/img/profileicon/"+ playerData.profileIconId +".png"}></img>
+// <img width = "100" height="100" src ={"http://ddragon.leagueoflegends.com/cdn/12.15.1/img/profileicon/"+ playerData.profileIconId +".png"}></img>
 
-<img width = "100" height="100" src = {IMAGES[playerTier.toLowerCase()]} alt = "icon"></img>
-<p>{playerTier}</p>
-</>
+// <img width = "100" height="100" src = {IMAGES[playerTier.toLowerCase()]} alt = "icon"></img>
+// <p>{playerTier}</p>
+// </>
 
-:
+// :
 
-<><p>No player Data</p></> }
+// <><p>No player Data</p></> }
 
-    </div>
+//     </div>
   )}
 
 
