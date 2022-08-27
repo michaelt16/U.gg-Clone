@@ -14,7 +14,7 @@ function App() {
   const [playerData, setPlayerData] = useState ({});
   const [playerTier, setPlayerTier] = useState ("");
 
-  const API_KEY=  "RGAPI-c6ef3ac7-151b-4dca-a485-eb46a631d7ff";
+  const API_KEY=  "RGAPI-41e94f3c-e2c4-41f0-b542-07e0310b01ae";
   console.log(searchText)
 
   //function to search player
